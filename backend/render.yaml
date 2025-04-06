@@ -5,14 +5,3 @@ services:
     plan: free
     buildCommand: npm install
     startCommand: node index.js
-    envVars:
-      - key: PORT
-        value: 10000
-      - key: MONGODB_URI
-        value: your-mongo-uri-here
-      - key: SESSION_SECRET
-        value: your-session-secret
-      - key: EMAIL
-        value: your-gmail-address
-      - key: EMAIL_PASSWORD
-        value: your-gmail-app-password
