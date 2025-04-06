@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PingME - Products</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .product-section {
+      padding: 60px 30px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .product-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00796b;
+    }
+
+    .product-section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <%- include('partials/header') %>
+
+  <section class="product-section">
+    <h1>Our Products</h1>
+    <p>Explore our wide range of custom QR code decals designed for cars, motorcycles, laptops, and more. Each product is crafted with precision and quality to ensure durability and aesthetic appeal.</p>
+    <p>Whether you're looking for a sleek design or something personalized, we have options to suit every style and preference. Browse our collection and find the perfect QR code decal for your needs.</p>
+  </section>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

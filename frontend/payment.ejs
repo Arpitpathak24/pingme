@@ -1,0 +1,28 @@
+<!-- payment.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - PingME</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- Include Header -->
+  <%- include('partials/header') %>
+
+  <div class="payment-container">
+    <h1>Payment</h1>
+    <p>Thank you for providing your vehicle details. Please proceed with the payment.</p>
+    <!-- Add payment form or instructions here -->
+    <form action="/payment" method="POST">
+      <button type="submit">Proceed to Payment</button>
+    </form>
+  </div>
+
+  <!-- Include Footer -->
+  <%- include('partials/footer') %>
+
+</body>
+</html>

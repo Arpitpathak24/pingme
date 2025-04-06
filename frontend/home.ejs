@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PingME - Home</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 40px;
+      background: linear-gradient(to right, #e0f7fa, #e1f5fe);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero .cta-btn {
+      background-color: #00796b;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .hero .cta-btn:hover {
+      background-color: #004d40;
+    }
+
+    .workflow {
+      background-color: #f0f0f0;
+      padding: 60px 30px;
+      text-align: center;
+    }
+
+    .workflow h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
+
+    .step {
+      background-color: #ffffff;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    .step .number {
+      background-color: #00796b;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      display: inline-block;
+      border-radius: 50%;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 60px 40px;
+      background-color: #ffffff;
+    }
+
+    .feature {
+      background: #f1f1f1;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    footer {
+      background-color: #222;
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #ccc;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <%- include('partials/header') %>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to PingME</h1>
+    <p>Buy custom QR code decals for your car and more!</p>
+    <% if (loggedIn) { %>
+      <a href="/vehicle-details" class="cta-btn">Buy Now</a>
+    <% } else { %>
+      <a href="/signup" class="cta-btn">Buy Now</a>
+    <% } %>
+  </section>
+
+  <!-- Workflow Section -->
+  <section class="workflow">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="number">1</span>
+        <h3>Sign Up / Log In</h3>
+        <p>Create an account or log in to access your dashboard.</p>
+      </div>
+      <div class="step">
+        <span class="number">2</span>
+        <h3>Enter Vehicle Details</h3>
+        <p>Provide your vehicle's number, type, brand, and upload required documents.</p>
+      </div>
+      <div class="step">
+        <span class="number">3</span>
+        <h3>Make Payment</h3>
+        <p>Select a payment method and complete the purchase securely.</p>
+      </div>
+      <div class="step">
+        <span class="number">4</span>
+        <h3>Download Your QR Sticker</h3>
+        <p>Once approved, download your personalized QR code sticker.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="feature">
+      <h3>Custom Designs</h3>
+      <p>We offer a variety of custom design options for your QR code decals.</p>
+    </div>
+    <div class="feature">
+      <h3>Easy Ordering</h3>
+      <p>Ordering is simple and secure through our website.</p>
+    </div>
+    <div class="feature">
+      <h3>Fast Shipping</h3>
+      <p>Enjoy fast and reliable shipping for your orders.</p>
+    </div>
+  </section>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

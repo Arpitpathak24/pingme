@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Details - PingME</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- Include Header -->
+  <%- include('partials/header') %>
+
+  <div class="vehicle-details-container">
+    <h1>Enter Your Vehicle Details</h1>
+
+    <!-- Vehicle Details Form -->
+    <form action="/submit-vehicle-details" method="POST" enctype="multipart/form-data">
+      <label for="vehicleNumber">Vehicle Number:</label>
+      <input type="text" name="vehicleNumber" id="vehicleNumber" required><br>
+    
+      <label for="vehicleType">Vehicle Type:</label>
+      <select name="vehicleType" id="vehicleType" required>
+        <option value="car">Car</option>
+        <option value="bike">Bike</option>
+        <!-- Add other options here -->
+      </select><br>
+    
+      <label for="brandModel">Brand/Model:</label>
+      <input type="text" name="brandModel" id="brandModel" required><br>
+    
+      <label for="registrationYear">Registration Year:</label>
+      <input type="text" name="registrationYear" id="registrationYear" required><br>
+    
+      <label for="documents">Upload Documents (RC, Insurance):</label>
+      <input type="file" name="documents" id="documents" required><br>
+    
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- Include Footer -->
+  <%- include('partials/footer') %>
+
+</body>
+</html>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+
+  .vehicle-details-container {
+    max-width: 900px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .vehicle-details-container h1 {
+    font-size: 2.5rem;
+    color: #00796b;
+    margin-bottom: 20px;
+  }
+
+  .vehicle-info {
+    margin-top: 30px;
+  }
+
+  .vehicle-info p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+</style>

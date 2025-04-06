@@ -1,0 +1,104 @@
+<!-- login.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - PingME</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- Include Header -->
+  <%- include('partials/header') %>
+
+  <div class="login-container">
+    <h1>Login</h1>
+
+    <!-- Display Error Message if Login Failed -->
+    <div class="error-message">
+      <% if (error === 'invalid') { %>
+        <p style="color: red;">Invalid username or password. Please try again.</p>
+      <% } %>
+    </div>
+
+    <form action="/login" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br><br>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br><br>
+      
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Forgot Password Link -->
+    <p><a href="/reset-password">Forgot Password?</a></p>
+  </div>
+
+  <!-- Include Footer -->
+  <%- include('partials/footer') %>
+
+</body>
+</html>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+
+  .login-container {
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .login-container h1 {
+    font-size: 2rem;
+    color: #00796b;
+    margin-bottom: 20px;
+  }
+
+  .login-container form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .login-container label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .login-container input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .login-container button {
+    background-color: #00796b;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .login-container button:hover {
+    background-color: #004d40;
+  }
+
+  .login-container p {
+    text-align: center;
+    margin-top: 20px;
+  }
+</style>
