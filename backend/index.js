@@ -12,13 +12,14 @@ const nodemailer = require('nodemailer');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Uploads folder setup
 const uploadPath = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath, { recursive: true });
   console.log('Uploads directory created');
 }
 
-// Setup email transporter
+// Email transporter setup
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -39,6 +40,12 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../frontend'));
 app.use(express.static(path.join(__dirname, '../public')));
 
+// Middleware to set loggedIn flag in all views
+app.use((req, res, next) => {
+  res.locals.loggedIn = !!req.session.userId;
+  next();
+});
+
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
@@ -46,7 +53,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // MongoDB Schemas
 const User = mongoose.model('User', new mongoose.Schema({
-  username: { type: String, required: true, unique: true }, // treated as email
+  username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 }));
@@ -61,8 +68,7 @@ const Vehicle = mongoose.model('Vehicle', new mongoose.Schema({
 
 // Routes
 app.get('/', (req, res) => {
-  const loggedInUser = req.session.userId;
-  res.render('home', { loggedIn: !!loggedInUser });
+  res.render('home');
 });
 
 app.get('/about', (req, res) => res.render('about'));
@@ -71,8 +77,7 @@ app.get('/contact', (req, res) => res.render('contact'));
 
 // Signup
 app.get('/signup', (req, res) => {
-  const error = req.query.error;
-  res.render('signup', { error });
+  res.render('signup', { error: req.query.error });
 });
 
 app.post('/signup', async (req, res) => {
@@ -95,8 +100,7 @@ app.post('/signup', async (req, res) => {
 
 // Login
 app.get('/login', (req, res) => {
-  const error = req.query.error || null;
-  res.render('login', { error });
+  res.render('login', { error: req.query.error || null });
 });
 
 app.post('/login', async (req, res) => {
@@ -105,8 +109,8 @@ app.post('/login', async (req, res) => {
     const user = await User.findOne({ username });
     if (!user) return res.redirect('/login?error=invalid');
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
-    if (!passwordMatch) return res.redirect('/login?error=invalid');
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return res.redirect('/login?error=invalid');
 
     req.session.userId = user._id;
     res.redirect('/');
@@ -116,13 +120,11 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Forgot Password Form Page
+// Forgot Password
 app.get('/reset-password', (req, res) => {
-  const error = req.query.error || null;
-  res.render('reset-password', { error });
+  res.render('reset-password', { error: req.query.error || null });
 });
 
-// Handle Reset Request
 app.post('/reset-password', async (req, res) => {
   const { email } = req.body;
   try {
@@ -144,36 +146,32 @@ app.post('/reset-password', async (req, res) => {
   }
 });
 
-// Reset Password Form (dynamic URL)
 app.get('/reset-password/:userId', (req, res) => {
   res.render('reset-password-form', { userId: req.params.userId });
 });
 
-// Handle actual password reset POST
 app.post('/reset-password/:userId', async (req, res) => {
   const { newPassword } = req.body;
-  const userId = req.params.userId;
   try {
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    await User.findByIdAndUpdate(userId, { password: hashedPassword });
+    const hashed = await bcrypt.hash(newPassword, 10);
+    await User.findByIdAndUpdate(req.params.userId, { password: hashed });
     res.redirect('/login?message=passwordreset');
   } catch (err) {
     console.error(err);
-    res.redirect(`/reset-password/${userId}?error=resetfailed`);
+    res.redirect(`/reset-password/${req.params.userId}?error=resetfailed`);
   }
 });
 
 // Vehicle Details
 app.get('/vehicle-details', (req, res) => {
-  const loggedInUser = req.session.userId;
-  if (loggedInUser) {
+  if (req.session.userId) {
     res.render('vehicle-details', { username: 'correctUser' });
   } else {
     res.redirect('/login');
   }
 });
 
-// Upload Setup
+// File Upload Setup
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (!fs.existsSync(uploadPath)) fs.mkdirSync(uploadPath, { recursive: true });
@@ -215,14 +213,12 @@ app.get('/logout', (req, res) => {
 
 // Buy Now
 app.get('/buy-now', (req, res) => {
-  const loggedInUser = req.session.userId;
-  res.redirect(loggedInUser ? '/vehicle-details' : '/signup');
+  res.redirect(req.session.userId ? '/vehicle-details' : '/signup');
 });
 
 // Payment
 app.get('/payment', (req, res) => {
-  const loggedInUser = req.session.userId;
-  res.render(loggedInUser ? 'payment' : 'login');
+  res.render(req.session.userId ? 'payment' : 'login');
 });
 
 app.post('/payment', (req, res) => {

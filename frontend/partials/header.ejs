@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Header Example</title>
-  <link rel="stylesheet" href="/styles.css"> <!-- Your CSS file -->
+  <link rel="stylesheet" href="/styles.css">
   <style>
     header {
       display: flex;
@@ -42,9 +42,7 @@
   <header>
     <!-- Logo on the left -->
     <div>
-      <a href="/">
-        <img src="/logo.png" alt="Company Logo">
-      </a>
+      <img src="/logo.png" alt="Company Logo">
     </div>
 
     <!-- Navigation on the right -->
@@ -57,9 +55,6 @@
 
         <% if (loggedIn) { %>
           <li><a href="/logout">Logout</a></li>
-        <% } else { %>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/signup">Signup</a></li>
         <% } %>
       </ul>
     </nav>
