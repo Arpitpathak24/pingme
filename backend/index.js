@@ -129,7 +129,7 @@ app.post('/reset-password', async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.redirect('/reset-password?error=emailnotfound');
 
-    const resetLink = `http://localhost:${PORT}/reset-password/${user._id}`;
+    const resetLink = `https://pingme-q34k.onrender.com/reset-password/${user._id}`;
     await transporter.sendMail({
       from: process.env.EMAIL,
       to: email,
