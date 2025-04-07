@@ -10,12 +10,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 30px 40px; /* Increased vertical padding for more height */
+      padding: 30px 40px;
       background-color: #f4f4f4;
     }
 
     header img {
-      height: 60px; /* Slightly larger logo for better visibility */
+      height: 60px;
     }
 
     nav ul {
@@ -42,7 +42,9 @@
   <header>
     <!-- Logo on the left -->
     <div>
-      <img src="/logo.png" alt="Company Logo">
+      <a href="/">
+        <img src="/logo.png" alt="Company Logo">
+      </a>
     </div>
 
     <!-- Navigation on the right -->
@@ -52,6 +54,13 @@
         <li><a href="/about">About Us</a></li>
         <li><a href="/products">Products</a></li>
         <li><a href="/contact">Contact</a></li>
+
+        <% if (loggedIn) { %>
+          <li><a href="/logout">Logout</a></li>
+        <% } else { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/signup">Signup</a></li>
+        <% } %>
       </ul>
     </nav>
   </header>
