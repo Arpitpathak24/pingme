@@ -87,7 +87,7 @@ app.get('/cancellation-policy', (req, res) => {
 });
 
 // Route for the Pricing and Shipping page
-app.get('/pricing-shipping', (req, res) => {
+app.get('/pricing-shipment', (req, res) => {
   res.render('pricing-shipping');  // Render the 'pricing-shipping.ejs' file
 });
 
