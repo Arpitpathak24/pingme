@@ -148,6 +148,51 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero .cta-btn {
+        padding: 10px 20px;
+      }
+
+      .workflow h2 {
+        font-size: 1.5rem;
+      }
+
+      .steps {
+        grid-template-columns: 1fr 1fr; /* Two steps per row */
+      }
+
+      .features {
+        grid-template-columns: 1fr; /* One feature per row */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .cta-btn {
+        padding: 10px 20px;
+      }
+
+      .feature h3 {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
