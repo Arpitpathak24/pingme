@@ -71,6 +71,27 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
+// Route for the Privacy Policy page
+app.get('/privacy-policy', (req, res) => {
+  res.render('privacy-policy');  // Render the 'privacy-policy.ejs' file
+});
+
+// Route for the Refund Policy page
+app.get('/refund-policy', (req, res) => {
+  res.render('refund-policy');  // Render the 'refund-policy.ejs' file
+});
+
+// Route for the Cancellation Policy page
+app.get('/cancellation-policy', (req, res) => {
+  res.render('cancellation-policy');  // Render the 'cancellation-policy.ejs' file
+});
+
+// Route for the Pricing and Shipping page
+app.get('/pricing-shipping', (req, res) => {
+  res.render('pricing-shipping');  // Render the 'pricing-shipping.ejs' file
+});
+
+
 app.get('/about', (req, res) => res.render('about'));
 app.get('/products', (req, res) => res.render('products'));
 app.get('/contact', (req, res) => res.render('contact'));
